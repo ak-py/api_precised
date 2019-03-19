@@ -1,4 +1,4 @@
-available_tyks_info = [
+tyk_info = [
     {'id': '101', 'title': 'Pricing - High', 'avg_accuracy': '91%',
         'format': '6 - 3 Pros & 3 Cons', 'status': 'OK'},
     {'id': '102', 'title': 'Pricing - Low', 'avg_accuracy': '91%',
@@ -22,3 +22,9 @@ available_tyks_info = [
     {'id': '111', 'title': 'Uniform - NOT PROVIDE', 'avg_accuracy': '82%',
         'format': '2 - 1 Pros & 1 Cons', 'status': 'OK'},
 ]
+
+tyk_ids = [tyk['id'] for tyk in tyk_info]
+tyk_ids_format_six = [tyk['id']
+                      for tyk in tyk_info if tyk['format'] == '6 - 3 Pros & 3 Cons']
+tyk_ids_format_two = [tyk['id']
+                      for tyk in tyk_info if tyk['format'] == '2 - 1 Pros & 1 Cons']

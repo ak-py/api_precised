@@ -1,30 +1,26 @@
 from flask import Flask, jsonify, request, Blueprint, url_for
 from flask_restplus import Api, Resource, fields, abort
 
+# Local imports
 from available_tyks_info import *
 from api_model_objects import *
 
+
+# App init
 app = Flask(__name__)
 blueprint = Blueprint('api', __name__, url_prefix='/api')
 api = Api(blueprint, doc='/doc/', version='3.0.1',
           description='Artificial Intelligence @ PrecisEd Online - API')
-
-
 app.register_blueprint(blueprint)
-
 api = api.namespace(
     'api', description='')
 
 
-# set app properties
-app.available_tyks = available_tyks_info
-app.tyk_ids = [tyk['id'] for tyk in app.available_tyks]
-
-app.tyk_ids_format_six = tyk_ids_format_six = [
-    tyk['id'] for tyk in app.available_tyks if tyk['format'] == '6 - 3 Pros & 3 Cons']
-
-app.tyk_ids_format_two = tyk_ids_format_two = [
-    tyk['id'] for tyk in app.available_tyks if tyk['format'] == '2 - 1 Pros & 1 Cons']
+# Set app properties
+app.tyk_info = tyk_info
+app.tyk_ids = tyk_ids
+app.tyk_ids_format_six = tyk_ids_format_six
+app.tyk_ids_format_two = tyk_ids_format_two
 
 
 ''' Format Six'''
