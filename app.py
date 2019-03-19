@@ -1,4 +1,5 @@
-from flask import Flask, jsonify, request, Blueprint, url_for
+import os
+from flask import Flask, jsonify, request, Blueprint, url_for, send_from_directory
 from flask_restplus import Api, Resource, fields, abort
 
 # Local imports
@@ -81,6 +82,12 @@ class format_two(Resource):
     def post(self):
         postedData = request.get_json()
         return jsonify(postedData)
+
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 
 if __name__ == "__main__":
