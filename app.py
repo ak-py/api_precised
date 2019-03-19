@@ -3,8 +3,8 @@ from flask import Flask, jsonify, request, Blueprint, url_for, send_from_directo
 from flask_restplus import Api, Resource, fields, abort
 
 # Local imports
-from available_tyks_info import *
-from api_model_objects import *
+from available_tyks_info import tyk_info, tyk_ids, tyk_ids_format_six, tyk_ids_format_two
+from api_model_objects import student_text_format_six_model_object, ai_predictions_format_six_model_object, student_text_format_two_model_object, ai_predictions_format_two_model_object
 
 
 # App init
