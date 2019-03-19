@@ -1,6 +1,8 @@
 from flask import Flask, jsonify, request, Blueprint, url_for
 from flask_restplus import Api, Resource, fields, abort
 
+from available_tyks_info import *
+from api_model_objects import *
 
 app = Flask(__name__)
 blueprint = Blueprint('api', __name__, url_prefix='/api')
@@ -14,51 +16,16 @@ api = api.namespace(
     'api', description='')
 
 
-app.available_tyks = [
-    {'id': '101', 'title': 'Pricing - High', 'avg_accuracy': '91%',
-        'format': '6 - 3 Pros & 3 Cons', 'status': 'OK'},
-    {'id': '102', 'title': 'Pricing - Low', 'avg_accuracy': '91%',
-        'format': '6 - 3 Pros & 3 Cons', 'status': 'OK'},
-    {'id': '103', 'title': 'Accounting - Cash', 'avg_accuracy': '94%',
-        'format': '2 - 1 Pros & 1 Cons', 'status': 'OK'},
-    {'id': '104', 'title': 'Accounting - Accrual', 'avg_accuracy': '94%',
-        'format': '2 - 1 Pros & 1 Cons', 'status': 'OK'},
-    {'id': '105', 'title': 'Location - Mid-Town', 'avg_accuracy': '92%',
-        'format': '6 - 3 Pros & 3 Cons', 'status': 'OK'},
-    {'id': '106', 'title': 'Location - North-End', 'avg_accuracy': '95%',
-        'format': '6 - 3 Pros & 3 Cons', 'status': 'OK'},
-    {'id': '107', 'title': 'Location - Strip Mall', 'avg_accuracy': '89%',
-        'format': '6 - 3 Pros & 3 Cons', 'status': 'OK'},
-    {'id': '108', 'title': 'Over-Ripe Tomatoes - BUYING', 'avg_accuracy': '90%',
-        'format': '2 - 1 Pros & 1 Cons', 'status': 'OK'},
-    {'id': '109', 'title': 'Over-Ripe Tomatoes - NOT BUYING',
-        'avg_accuracy': '90%', 'format': '2 - 1 Pros & 1 Cons', 'status': 'OK'},
-    {'id': '110', 'title': 'Uniform - PROVIDE', 'avg_accuracy': '84%',
-        'format': '2 - 1 Pros & 1 Cons', 'status': 'OK'},
-    {'id': '111', 'title': 'Uniform - NOT PROVIDE', 'avg_accuracy': '82%',
-        'format': '2 - 1 Pros & 1 Cons', 'status': 'OK'},
-]
-
+# set app properties
+app.available_tyks = available_tyks_info
 app.tyk_ids = [tyk['id'] for tyk in app.available_tyks]
 
 
-student_text_format_six_model = api.model('student_text_format_six_model', {
-    "pro_1": fields.String(required=True),
-    "pro_2": fields.String(required=True),
-    "pro_3": fields.String(required=True),
-    "con_1": fields.String(required=True),
-    "con_2": fields.String(required=True),
-    "con_3": fields.String(required=True),
-})
+student_text_format_six_model = api.model(
+    'student_text_format_six_model', student_text_format_six_model_object)
 
-ai_predictions_format_six_model = api.model('ai_predictions_format_six_model', {
-    "pro_1": fields.Boolean(required=False),
-    "pro_2": fields.Boolean(required=False),
-    "pro_3": fields.Boolean(required=False),
-    "con_1": fields.Boolean(required=False),
-    "con_2": fields.Boolean(required=False),
-    "con_3": fields.Boolean(required=False)
-})
+ai_predictions_format_six_model = api.model(
+    'ai_predictions_format_six_model', ai_predictions_format_six_model)
 
 
 tyk_format_six_model = api.model('tyk_format_six_model', {
@@ -66,7 +33,7 @@ tyk_format_six_model = api.model('tyk_format_six_model', {
     'student_id': fields.String(required=False),
     'user_id': fields.String(required=False),
     "student_text_format_six": fields.Nested(student_text_format_six_model, required=True),
-    "ai_predictions_format_six": fields.Nested(ai_predictions_format_six_model),
+    "ai_predictions_format_six": fields.Nested(ai_predictions_format_six_model, required=False),
     "ai_score": fields.Integer(required=False),
     "max_score": fields.Integer(required=False)
 })
