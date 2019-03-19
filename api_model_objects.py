@@ -9,7 +9,7 @@ student_text_format_six_model_object = {
     "con_3": fields.String(required=True),
 }
 
-ai_predictions_format_six_model = {
+ai_predictions_format_six_model_object = {
     "pro_1": fields.Boolean(required=False),
     "pro_2": fields.Boolean(required=False),
     "pro_3": fields.Boolean(required=False),
@@ -23,7 +23,7 @@ student_text_format_two_model_object = {
     "con_1": fields.String(required=True)
 }
 
-ai_predictions_format_two_model = {
+ai_predictions_format_two_model_object = {
     "pro_1": fields.Boolean(required=False),
     "con_1": fields.Boolean(required=False)
 }

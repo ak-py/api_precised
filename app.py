@@ -31,7 +31,7 @@ student_text_format_six_model = api.model(
     'student_text_format_six_model', student_text_format_six_model_object)
 
 ai_predictions_format_six_model = api.model(
-    'ai_predictions_format_six_model', ai_predictions_format_six_model)
+    'ai_predictions_format_six_model', ai_predictions_format_six_model_object)
 
 tyk_format_six_model = api.model('tyk_format_six_model', {
     'tyk_id': fields.String(required=True, enum=app.tyk_ids_format_six),
@@ -51,7 +51,7 @@ student_text_format_two_model = api.model(
     'student_text_format_two_model', student_text_format_two_model_object)
 
 ai_predictions_format_two_model = api.model(
-    'ai_predictions_format_two_model', ai_predictions_format_two_model)
+    'ai_predictions_format_two_model', ai_predictions_format_two_model_object)
 
 tyk_format_two_model = api.model('tyk_format_two_model', {
     'tyk_id': fields.String(required=True, enum=app.tyk_ids_format_two),
