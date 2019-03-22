@@ -1,3 +1,6 @@
+# Coveralls file
+.coveralls.yml
+
 # Binary files
 *.bin
 

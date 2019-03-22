@@ -1,5 +1,5 @@
 import os
-from flask import Flask, jsonify, request, Blueprint, url_for, send_from_directory
+from flask import Flask, jsonify, request, Blueprint, url_for, send_from_directory, render_template
 from flask_restplus import Api, Resource, fields, abort
 
 # Local imports
@@ -82,6 +82,17 @@ class format_two(Resource):
     def post(self):
         postedData = request.get_json()
         return jsonify(postedData)
+
+
+@app.route('/')
+@app.route('/home')
+def home():
+    return render_template('home.html')
+
+
+@app.route('/about')
+def about():
+    return render_template('home.html')
 
 
 @app.route('/favicon.ico')

@@ -1,0 +1,36 @@
+{% extends 'layout.html' %} {% block body %}
+
+<h1>Dashboard</h1>
+<hr />
+<table class="table table-striped">
+    <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Avg Accuracy</th>
+        <th>Format</th>
+        <th>Status</th>
+    </tr>
+    {% for tyk in available_tyks %}
+    <tr>
+
+        <td><a href="/tyk/{{tyk.id}}">{{ tyk.id }}</a></td>
+        <td>{{ tyk.title }}</td>
+        <td>{{ tyk.avg_accuracy }}</td>
+        <td>{{ tyk.format }}</td>
+        <td>
+            {% if tyk.status=='OK' %}
+            <a class="btn btn-success">{{tyk.status}}</a>
+            {% elif tyk.status=='NOT OK' %}
+            <a class="btn btn-danger">{{tyk.status}}</a>
+            {% elif tyk.status=='DISABLED' %}
+            <a class="btn btn-secondary">{{tyk.status}}</a>
+            {% else %}
+            <a class="btn btn-info">{{tyk.status}}</a>
+            {% endif %}
+        </td>
+
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
