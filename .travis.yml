@@ -1,0 +1,7 @@
+language: python
+python:
+  - "3.6"
+  - "3.7"
+install:
+  - pip3 install Flask flask-restplus
+script: python3 app.py
