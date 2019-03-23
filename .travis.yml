@@ -3,5 +3,5 @@ python:
   - "3.5"
   - "3.6"
 install:
-  - pip3 install Flask flask-restplus
-script: python3 app.py
+  - pip3 install Flask flask-restplus flask-pymongo bson
+script: python3 web/app.py

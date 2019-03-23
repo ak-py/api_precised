@@ -1,6 +1,8 @@
 import os
 from flask import Flask, jsonify, request, Blueprint, url_for, send_from_directory, render_template
 from flask_restplus import Api, Resource, fields, abort
+from flask_pymongo import PyMongo
+from bson.json_util import dumps
 
 # Local imports
 from available_tyks_info import tyk_info, tyk_ids, tyk_ids_format_six, tyk_ids_format_two
@@ -13,8 +15,11 @@ blueprint = Blueprint('api', __name__, url_prefix='/api')
 api = Api(blueprint, doc='/doc/', version='3.0.1',
           description='Artificial Intelligence @ PrecisEd Online - API')
 app.register_blueprint(blueprint)
-api = api.namespace(
-    'api', description='')
+
+# Mongo DB
+app.config['MONGO_DBNAME'] = 'connect_to_mongo'
+app.config['MONGO_URI'] = 'mongodb://pretty:printed123@ds012889.mlab.com:12889/connect_to_mongo'
+mongo = PyMongo(app)
 
 
 # Set app properties
@@ -71,7 +76,9 @@ class format_six(Resource):
     @api.response(400, 'Validation Error')
     def post(self):
         postedData = request.get_json()
-        return jsonify(postedData)
+        format_six_request = mongo.db.format_six_requests
+        result = format_six_request.insert(postedData)
+        return dumps(postedData)
 
 
 @api.route('/tyk/format_two')
@@ -81,7 +88,11 @@ class format_two(Resource):
     @api.response(400, 'Validation Error')
     def post(self):
         postedData = request.get_json()
-        return jsonify(postedData)
+        # print(postedData)
+        format_two_request = mongo.db.format_two_requests
+        result = format_two_request.insert(postedData)
+        print(postedData['_id'])
+        return dumps(postedData['_id'])
 
 
 @app.route('/')
@@ -102,4 +113,4 @@ def favicon():
 
 
 if __name__ == "__main__":
-    app.run(port=5000, debug=True)
+    app.run(host='0.0.0.0', debug=True)
