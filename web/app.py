@@ -2,7 +2,6 @@ import os
 from flask import Flask, jsonify, request, Blueprint, url_for, send_from_directory, render_template
 from flask_restplus import Api, Resource, fields, abort
 from flask_pymongo import PyMongo
-from bson.json_util import dumps
 
 # Local imports
 from available_tyks_info import tyk_info, tyk_ids, tyk_ids_format_six, tyk_ids_format_two
@@ -78,7 +77,7 @@ class format_six(Resource):
         postedData = request.get_json()
         format_six_request = mongo.db.format_six_requests
         result = format_six_request.insert(postedData)
-        return dumps(postedData)
+        return jsonify(postedData)
 
 
 @api.route('/tyk/format_two')
@@ -90,9 +89,9 @@ class format_two(Resource):
         postedData = request.get_json()
         # print(postedData)
         format_two_request = mongo.db.format_two_requests
-        result = format_two_request.insert(postedData)
+        format_two_request.insert(postedData)
         print(postedData['_id'])
-        return dumps(postedData['_id'])
+        return 'added!'
 
 
 @app.route('/')
