@@ -8,32 +8,56 @@
 <form method="POST" action="">
     {% if form and form.pro_1 %}
     <div class="form-group">
+        {% if form.pro_1.errors %}
+        {{render_field(form.pro_1, class="form-control is-invalid")}}
+        {% else %}
         {{render_field(form.pro_1, class="form-control")}}
+        {%endif%}
     </div>
     {% endif %}
     {% if form and form.pro_2 %}
     <div class="form-group">
+        {% if form.pro_2.errors %}
+        {{render_field(form.pro_2, class="form-control is-invalid")}}
+        {% else %}
         {{render_field(form.pro_2, class="form-control")}}
+        {%endif%}
     </div>
     {% endif %}
     {% if form and form.pro_3 %}
     <div class="form-group">
+        {% if form.pro_3.errors %}
+        {{render_field(form.pro_3, class="form-control is-invalid")}}
+        {% else %}
         {{render_field(form.pro_3, class="form-control")}}
+        {%endif%}
     </div>
     {% endif %}
     {% if form and form.con_1 %}
     <div class="form-group">
+        {% if form.con_1.errors %}
+        {{render_field(form.con_1, class="form-control is-invalid")}}
+        {% else %}
         {{render_field(form.con_1, class="form-control")}}
+        {%endif%}
     </div>
     {% endif %}
     {% if form and form.con_2 %}
     <div class="form-group">
+        {% if form.con_2.errors %}
+        {{render_field(form.con_2, class="form-control is-invalid")}}
+        {% else %}
         {{render_field(form.con_2, class="form-control")}}
+        {%endif%}
     </div>
     {% endif %}
     {% if form and form.con_3 %}
     <div class="form-group">
+        {% if form.con_3.errors %}
+        {{render_field(form.con_3, class="form-control is-invalid")}}
+        {% else %}
         {{render_field(form.con_3, class="form-control")}}
+        {%endif%}
     </div>
     {% endif %}
     <p><input type="submit" class="btn btn-primary" value="Submit" /></p>

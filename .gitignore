@@ -1,3 +1,6 @@
+# data directory
+data/
+
 # Travis file
 # .travis.yml
 

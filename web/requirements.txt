@@ -1,5 +1,14 @@
 flask
+flask_wtf
 flask_restplus
 bson
 pymongo
 flask_pymongo
+numpy
+nltk
+pandas
+matplotlib
+scipy
+gensim
+sklearn
+requests
